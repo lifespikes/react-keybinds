@@ -37,7 +37,7 @@
   },
   "name": "keyshort",
   "author": "santigp258",
-  "description": "Small package to manage your app shortcuts",
+  "description": "Simple package to manage keyboard shortcuts",
   "module": "dist/keyshort.esm.js",
   "size-limit": [
     {
