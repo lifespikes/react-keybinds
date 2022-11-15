@@ -21,6 +21,19 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
+  "keywords": [
+    "keyshort",
+    "nextjs",
+    "javascript",
+    "typescript",
+    "react",
+    "keyboard",
+    "shortcuts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lifespikes/keyshort.git"
+  },
   "peerDependencies": {
     "react": ">=16"
   },
