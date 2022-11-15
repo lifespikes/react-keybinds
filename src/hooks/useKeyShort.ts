@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { KeyShortContext } from '../context/KeyShortContext';
+import { KeyShortContextState } from '../types';
 
-export const useKeyShort = () => {
+export const useKeyShort = (): KeyShortContextState => {
   const keyShortContext = useContext(KeyShortContext);
 
   if (!keyShortContext) {

@@ -2,6 +2,8 @@ import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { KeyShortProvider, ShortcutType } from '../.';
+import ShowShortcuts from './components/ShowShortcuts';
+import RegisterShortcut from './components/RegisterShortcut';
 
 const GLOBAL_COMMANDS: ShortcutType[] = [
   {
@@ -11,7 +13,7 @@ const GLOBAL_COMMANDS: ShortcutType[] = [
     },
     label: 'Test command',
     callback: () => {
-      console.log('Hello world');
+      alert('Hello world');
     },
   },
 ];
@@ -20,7 +22,8 @@ const App = () => {
   return (
     <div>
       <KeyShortProvider shortcuts={GLOBAL_COMMANDS}>
-        <div>test uwu</div>
+        <ShowShortcuts />
+        <RegisterShortcut />
       </KeyShortProvider>
     </div>
   );

@@ -17,7 +17,7 @@ export type ShortcutType = {
 };
 
 export type KeyShortContextType = {
-  registerShortcut?: (shortcut: ShortcutType) => void;
+  registerShortcut: (shortcut: ShortcutType) => void;
 };
 
 export type KeyShortContextState = KeyShortProviderPropsI & KeyShortContextType;

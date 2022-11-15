@@ -7,17 +7,19 @@ import React, {
 } from 'react';
 
 import {
-  KeyShortContextType,
-  ShortcutType,
-  KeyShortProviderPropsI,
   KeyShortContextState,
+  KeyShortProviderPropsI,
+  ShortcutType,
 } from '../types';
 import { isDuplicate } from '../utils';
 import { useShortcuts } from '../hooks';
 
 export const KeyShortContext = createContext({
   shortcuts: [] as ShortcutType[],
-} as KeyShortContextType);
+  registerShortcut: (shortcut: ShortcutType) => {
+    console.log('Not implemented', { shortcut });
+  },
+} as KeyShortContextState);
 
 const KeyShortProvider: FC<KeyShortProviderPropsI> = ({
   children,
@@ -25,7 +27,7 @@ const KeyShortProvider: FC<KeyShortProviderPropsI> = ({
 }) => {
   const [storeShortcuts, setStoreCommands] = useState(shortcuts);
 
-  const registerCommand = useCallback(
+  const registerShortcut = useCallback(
     (command: ShortcutType) => {
       if (isDuplicate(storeShortcuts, command)) {
         console.warn('Command already registered', { storeShortcuts, command });
@@ -41,7 +43,7 @@ const KeyShortProvider: FC<KeyShortProviderPropsI> = ({
   const commandsContext = useMemo<KeyShortContextState>(
     () => ({
       shortcuts: storeShortcuts,
-      registerCommand,
+      registerShortcut,
     }),
     [storeShortcuts]
   );
