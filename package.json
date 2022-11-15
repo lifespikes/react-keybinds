@@ -59,7 +59,14 @@
     "@storybook/react": "^6.5.13",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
     "babel-loader": "^9.1.0",
+    "eslint": "8.19.0",
+    "eslint-config-next": "12.2.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^8.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -68,5 +75,8 @@
     "tsdx": "^0.14.1",
     "tslib": "^2.4.1",
     "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "use-debounce": "^8.0.4"
   }
 }

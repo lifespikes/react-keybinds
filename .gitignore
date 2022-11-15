@@ -4,3 +4,4 @@ node_modules
 .cache
 dist
 example/node_modules
+.idea

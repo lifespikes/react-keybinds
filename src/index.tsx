@@ -1,4 +1,5 @@
 import React, { FC, HTMLAttributes, ReactChild } from 'react';
+import PlatformDetector from './utils/platform';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** custom content, defaults to 'the snozzberries taste like snozzberries' */
@@ -11,5 +12,6 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  * A custom Thing component. Neat!
  */
 export const Thing: FC<Props> = ({ children }) => {
+  console.log('children', new PlatformDetector().currentPlatform());
   return <div>{children || `the snozzberries taste like snozzberries`}</div>;
 };
