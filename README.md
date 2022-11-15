@@ -1,5 +1,10 @@
 # react-keybinds
 
+[<img src="https://img.shields.io/npm/v/react-keybinds?style=for-the-badge">](https://www.npmjs.com/package/react-keybinds)
+<img src="https://img.shields.io/npm/types/react-keybinds?label=%20&amp;logo=typescript&amp;logoColor=white&amp;style=for-the-badge">
+<img src="https://img.shields.io/npm/dt/react-keybinds?style=for-the-badge" >
+[<img src="https://img.shields.io/bundlephobia/minzip/react-keybinds?style=for-the-badge">](https://bundlephobia.com/package/react-keybinds)
+
 Simple package to manage keyboard shortcuts
 
 # Install
