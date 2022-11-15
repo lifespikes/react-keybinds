@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -22,17 +22,19 @@
     "build-storybook": "build-storybook"
   },
   "keywords": [
-    "keyshort",
+    "react-keybinds",
     "nextjs",
     "javascript",
     "typescript",
     "react",
     "keyboard",
-    "shortcuts"
+    "shortcuts",
+    "hotkeys",
+    "keybinds"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/lifespikes/keyshort.git"
+    "url": "https://github.com/lifespikes/react-keybinds.git"
   },
   "peerDependencies": {
     "react": ">=16"
@@ -48,7 +50,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "keyshort",
+  "name": "react-keybinds",
   "author": "santigp258",
   "description": "Simple package to manage keyboard shortcuts",
   "module": "dist/keyshort.esm.js",

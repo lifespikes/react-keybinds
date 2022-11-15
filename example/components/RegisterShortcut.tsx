@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useKeyShort } from '../../.';
+import { useKeyBind } from '../../.';
 
 const RegisterShortcut = () => {
-  const { registerShortcut } = useKeyShort();
+  const { registerShortcut } = useKeyBind();
 
   const handleClickRegister = () => {
     registerShortcut({

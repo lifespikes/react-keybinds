@@ -1,4 +1,4 @@
-# KeyShort
+# react-keybinds
 
 Simple package to manage keyboard shortcuts
 
@@ -7,35 +7,35 @@ Simple package to manage keyboard shortcuts
 #### Using npm
 
 ```bash
-npm i keyshort
+npm i react-keybinds
 ```
 
 #### Using Yarn
 
 ```bash
-yarn add keyshort
+yarn add react-keybinds
 ```
 
 #### Using pnpm
 
 ```bash
-pnpm add keyshort
+pnpm add react-keybinds
 ```
 
 # Usage
 
 <sub>You can take a look at the [example](./example) </sub>
 
-### 1. Configuring the KeyShort provider
+### 1. Configuring the KeyBind provider
 
 ```tsx
-import {KeyShortProvider} from 'keyshort';
+import {KeyBindProvider} from 'react-keybinds';
 
 const App = () => {
     return (
-        <KeyShortProvider>
+        <KeyBindProvider>
             hello world
-        </KeyShortProvider>
+        </KeyBindProvider>
     );
 };
 ```
@@ -48,12 +48,12 @@ const App = () => {
 You can register commands globally
 
 ```tsx
-import {KeyShortProvider, ShortcutType} from 'keyshort';
+import {KeyBindProvider, ShortcutType} from 'react-keybinds';
 
 const GLOBAL_COMMANDS: ShortcutType[] = [
     {
         keys: {
-            Mac: ['Meta', 'Shift', 'P'],
+            Mac: ['Control', 'Shift', 'P'],
             Windows: ['Control', 'Shift', 'P'],
         },
         label: 'Test command',
@@ -65,9 +65,9 @@ const GLOBAL_COMMANDS: ShortcutType[] = [
 
 const App = () => {
     return (
-        <KeyShortProvider shortcuts={GLOBAL_COMMANDS}>
+        <KeyBindProvider shortcuts={GLOBAL_COMMANDS}>
             hello world
-        </KeyShortProvider>
+        </KeyBindProvider>
     );
 };
 ```
@@ -78,10 +78,10 @@ You can register a command in a specific part of your application. This is usefu
 handler that exists in a specific component.
 
 ```tsx
-import {KeyShortProvider, useKeyShort} from 'keyshort';
+import {KeyBindProvider, useKeyBind} from 'react-keybinds';
 
 const RegisterShortcutButton = () => {
-    const {registerShortcut} = useKeyShort();
+    const {registerShortcut} = useKeyBind();
 
     const handleClickRegister = () => {
         registerShortcut({
@@ -104,22 +104,22 @@ const RegisterShortcutButton = () => {
 
 const App = () => {
     return (
-        <KeyShortProvider>
+        <KeyBindProvider>
             <RegisterShortcutButton/>
-        </KeyShortProvider>
+        </KeyBindProvider>
     );
 };
 ```
 
 ### 4. List registered shortcuts
 
-You can list the registered shortcuts using the useKeyShort hook
+You can list the registered shortcuts using the useKeyBind hook
 
 ```tsx
-import {KeyShortProvider, useKeyShort} from 'keyshort';
+import {KeyBindProvider, useKeyBind} from 'react-keybinds';
 
 const ShowShortcuts = () => {
-    const {shortcuts} = useKeyShort();
+    const {shortcuts} = useKeyBind();
     const shortcutsList = shortcuts?.map((shortcut, index) => {
         return (
             <div key={index}>
@@ -143,9 +143,9 @@ const ShowShortcuts = () => {
 };
 const App = () => {
     return (
-        <KeyShortProvider>
+        <KeyBindProvider>
             <ShowShortcuts/>
-        </KeyShortProvider>
+        </KeyBindProvider>
     );
 };
 ```

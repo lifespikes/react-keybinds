@@ -1,2 +1,2 @@
-export { useKeyShort } from './useKeyShort';
+export { useKeyBind } from './useKeyBind';
 export { useShortcuts } from './useShortcuts';

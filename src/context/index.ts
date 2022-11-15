@@ -1,1 +1,1 @@
-export { default as KeyShortProvider } from './KeyShortContext';
+export { default as KeyBindProvider } from './KeyBindContext';

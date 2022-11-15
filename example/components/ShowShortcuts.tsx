@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useKeyShort } from '../../.';
+import { useKeyBind } from '../../.';
 
 const ShowShortcuts = () => {
-  const { shortcuts } = useKeyShort();
+  const { shortcuts } = useKeyBind();
   const shortcutsList = shortcuts?.map((shortcut, index) => {
     return (
       <div key={index}>

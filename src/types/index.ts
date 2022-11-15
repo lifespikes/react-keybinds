@@ -1,7 +1,7 @@
 import React from 'react';
 import { PlatformType } from './platform.type';
 
-export interface KeyShortProviderPropsI {
+export interface KeyBindProviderPropsI {
   children?: React.ReactNode;
   shortcuts?: ShortcutType[];
 }
@@ -16,8 +16,8 @@ export type ShortcutType = {
   callback?: () => void;
 };
 
-export type KeyShortContextType = {
+export type KeyBindContextType = {
   registerShortcut: (shortcut: ShortcutType) => void;
 };
 
-export type KeyShortContextState = KeyShortProviderPropsI & KeyShortContextType;
+export type KeyBindContextState = KeyBindProviderPropsI & KeyBindContextType;

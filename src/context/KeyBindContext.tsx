@@ -7,21 +7,21 @@ import React, {
 } from 'react';
 
 import {
-  KeyShortContextState,
-  KeyShortProviderPropsI,
+  KeyBindContextState,
+  KeyBindProviderPropsI,
   ShortcutType,
 } from '../types';
 import { isDuplicate } from '../utils';
 import { useShortcuts } from '../hooks';
 
-export const KeyShortContext = createContext({
+export const KeyBindContext = createContext({
   shortcuts: [] as ShortcutType[],
   registerShortcut: (shortcut: ShortcutType) => {
     console.log('Not implemented', { shortcut });
   },
-} as KeyShortContextState);
+} as KeyBindContextState);
 
-const KeyShortProvider: FC<KeyShortProviderPropsI> = ({
+const KeyBindProvider: FC<KeyBindProviderPropsI> = ({
   children,
   shortcuts = [],
 }) => {
@@ -40,7 +40,7 @@ const KeyShortProvider: FC<KeyShortProviderPropsI> = ({
 
   useShortcuts(storeShortcuts);
 
-  const commandsContext = useMemo<KeyShortContextState>(
+  const commandsContext = useMemo<KeyBindContextState>(
     () => ({
       shortcuts: storeShortcuts,
       registerShortcut,
@@ -48,10 +48,10 @@ const KeyShortProvider: FC<KeyShortProviderPropsI> = ({
     [storeShortcuts]
   );
   return (
-    <KeyShortContext.Provider value={commandsContext}>
+    <KeyBindContext.Provider value={commandsContext}>
       {children}
-    </KeyShortContext.Provider>
+    </KeyBindContext.Provider>
   );
 };
 
-export default KeyShortProvider;
+export default KeyBindProvider;
