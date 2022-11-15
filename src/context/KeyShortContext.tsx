@@ -13,7 +13,7 @@ import {
   KeyShortContextState,
 } from '../types';
 import { isDuplicate } from '../utils';
-import { useShortcuts } from '../hooks/useShortcuts';
+import { useShortcuts } from '../hooks';
 
 export const KeyShortContext = createContext({
   shortcuts: [] as ShortcutType[],

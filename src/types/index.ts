@@ -1,12 +1,17 @@
 import React from 'react';
+import { PlatformType } from './platform.type';
 
 export interface KeyShortProviderPropsI {
   children?: React.ReactNode;
   shortcuts?: ShortcutType[];
 }
 
+export type KeysType = {
+  [key in PlatformType]?: string[];
+};
+
 export type ShortcutType = {
-  keys: string[];
+  keys: KeysType;
   label: string;
   callback?: () => void;
 };

@@ -1,8 +1,9 @@
-export type PlatformType = 'Mac' | 'Windows' | 'Linux' | 'iOS' | 'Android';
-export type PlatformCollectionType = { [key in PlatformType]: string };
+import { PlatformCollectionType, PlatformType } from '../types/platform.type';
 
 export default class PlatformDetector {
   private platform: string;
+
+  static defaultPlatform: PlatformType = 'Windows';
 
   platforms: PlatformCollectionType = {
     Mac: 'mac',
@@ -59,10 +60,12 @@ export default class PlatformDetector {
     return this.isPlatform('Android');
   }
 
-  currentPlatform() {
-    return Object.keys(this.platforms).filter(key =>
-      this.isPlatform(key as PlatformType)
-    )[0];
+  currentPlatform(): PlatformType {
+    return (
+      (Object.keys(this.platforms).filter(key =>
+        this.isPlatform(key as PlatformType)
+      )[0] as PlatformType) ?? PlatformDetector.defaultPlatform
+    );
   }
 
   isIos() {

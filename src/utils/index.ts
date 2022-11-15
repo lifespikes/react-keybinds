@@ -1,4 +1,8 @@
 import { ShortcutType } from '../types';
+import PlatformDetector from './platform';
+export * from './platform';
+
+export const hasItems = (items: any[]) => items.length > 0;
 
 export const arraysAreEqual = (a: any[], b: any[]) => {
   if (a.length !== b.length) {
@@ -14,15 +18,26 @@ export const arraysAreEqual = (a: any[], b: any[]) => {
   return true;
 };
 
+export const getShortcutKeys = (shortcut: ShortcutType) => {
+  const platform = new PlatformDetector().currentPlatform();
+
+  const keys = shortcut.keys[platform];
+
+  if (!keys) {
+    console.warn(`No keys found for platform ${platform} in ${shortcut.label}`);
+    return Object.values(shortcut.keys)[0] ?? [];
+  }
+
+  return keys;
+};
+
 export const findShortcut = (shortcuts: ShortcutType[], keys: string[]) => {
-  if (keys.length === 0) {
+  if (!hasItems(keys)) {
     return null;
   }
 
   for (const shortcut of shortcuts) {
-    const shortcutKeys = shortcut.keys;
-
-    if (arraysAreEqual(shortcutKeys, keys)) {
+    if (arraysAreEqual(getShortcutKeys(shortcut), keys)) {
       return shortcut;
     }
   }
@@ -34,5 +49,5 @@ export const isDuplicate = (
   shortcuts: ShortcutType[],
   shortcut: ShortcutType
 ) => {
-  return !!findShortcut(shortcuts, shortcut.keys);
+  return !!findShortcut(shortcuts, getShortcutKeys(shortcut));
 };

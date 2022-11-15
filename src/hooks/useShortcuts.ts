@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-import { findShortcut } from '../utils';
+import { findShortcut, hasItems } from '../utils';
 import { ShortcutType } from '../types';
 
 export const useShortcuts = (shortcuts: ShortcutType[]) => {
@@ -11,12 +11,14 @@ export const useShortcuts = (shortcuts: ShortcutType[]) => {
   }, 1000);
 
   useEffect(() => {
-    const shortcut = findShortcut(shortcuts, keys);
-    if (shortcut && shortcut.callback) {
-      shortcut.callback();
-      setKeys([]);
+    if (hasItems(keys) && hasItems(shortcuts)) {
+      const shortcut = findShortcut(shortcuts, keys);
+      if (shortcut && shortcut.callback) {
+        shortcut.callback();
+        setKeys([]);
+      }
     }
-  }, [keys]);
+  }, [keys, shortcuts]);
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
