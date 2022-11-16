@@ -1,3 +1,5 @@
+![image](https://user-images.githubusercontent.com/67383906/202308279-365ced49-ad3a-4f14-a272-fe8c0e080e2c.png)
+
 # react-keybinds
 
 [<img src="https://img.shields.io/npm/v/react-keybinds?style=for-the-badge">](https://www.npmjs.com/package/react-keybinds)
@@ -5,7 +7,7 @@
 <img src="https://img.shields.io/npm/dt/react-keybinds?style=for-the-badge" >
 [<img src="https://img.shields.io/bundlephobia/minzip/react-keybinds?style=for-the-badge">](https://bundlephobia.com/package/react-keybinds)
 
-Simple package to manage keyboard shortcuts
+A lightweight library to manage keyboard shortcuts for your React application
 
 # Install
 
