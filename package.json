@@ -52,7 +52,7 @@
   },
   "name": "react-keybinds",
   "author": "santigp258",
-  "description": "Simple package to manage keyboard shortcuts",
+  "description": "A lightweight library to manage keyboard shortcuts for your React application.",
   "module": "dist/keyshort.esm.js",
   "size-limit": [
     {
