@@ -53,14 +53,14 @@
   "name": "react-keybinds",
   "author": "santigp258",
   "description": "A lightweight library to manage keyboard shortcuts for your React application.",
-  "module": "dist/keyshort.esm.js",
+  "module": "dist/react-keybinds.esm.js",
   "size-limit": [
     {
-      "path": "dist/keyshort.cjs.production.min.js",
+      "path": "dist/react-keybinds.cjs.production.min.js",
       "limit": "10 KB"
     },
     {
-      "path": "dist/keyshort.esm.js",
+      "path": "dist/react-keybinds.esm.js",
       "limit": "10 KB"
     }
   ],
