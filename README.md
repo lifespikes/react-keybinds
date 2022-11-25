@@ -120,6 +120,7 @@ const App = () => {
 
 You can also register a shortcut when a component is mounted. Like this:
 
+<sub>When you use the `useRegisterShortcut` hook it is necessary to use the `useMemo` hook</sub>
 ```tsx
 import * as React from 'react';
 import {useMemo, useState} from 'react';
