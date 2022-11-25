@@ -1,9 +1,11 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+
 import { KeyBindProvider, ShortcutType } from '../.';
 import ShowShortcuts from './components/ShowShortcuts';
 import RegisterShortcut from './components/RegisterShortcut';
+import { createRoot } from 'react-dom/client';
+import RegisterOnMount from './components/RegisterOnMount';
 
 const GLOBAL_COMMANDS: ShortcutType[] = [
   {
@@ -22,12 +24,17 @@ const GLOBAL_COMMANDS: ShortcutType[] = [
 const App = () => {
   return (
     <div>
-      <KeyBindProvider shortcuts={GLOBAL_COMMANDS}>
-        <ShowShortcuts />
-        <RegisterShortcut />
-      </KeyBindProvider>
+      <ShowShortcuts />
+      <RegisterShortcut />
+
+      <RegisterOnMount />
     </div>
   );
 };
+const root = createRoot(document.getElementById('root') as HTMLElement);
 
-ReactDOM.render(<App />, document.getElementById('root'));
+root.render(
+  <KeyBindProvider shortcuts={GLOBAL_COMMANDS}>
+    <App />
+  </KeyBindProvider>
+);

@@ -19,6 +19,7 @@ const RegisterShortcut = () => {
 
   return (
     <div>
+      <h1>Register shortcut</h1>
       <button onClick={handleClickRegister}>Register shortcut</button>
     </div>
   );

@@ -18,6 +18,14 @@ export type ShortcutType = {
 
 export type KeyBindContextType = {
   registerShortcut: (shortcut: ShortcutType) => void;
+  getKeysByPlatform: (
+    shortcut: ShortcutType
+  ) => FindFirstPlatformMatchType | null;
 };
 
 export type KeyBindContextState = KeyBindProviderPropsI & KeyBindContextType;
+
+export type FindFirstPlatformMatchType = {
+  platform: PlatformType;
+  keys: string[];
+};

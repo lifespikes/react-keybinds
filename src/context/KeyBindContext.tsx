@@ -11,15 +11,10 @@ import {
   KeyBindProviderPropsI,
   ShortcutType,
 } from '../types';
-import { isDuplicate } from '../utils';
+import { findFirstPlatformMatch, isDuplicate } from '../utils';
 import { useShortcuts } from '../hooks';
 
-export const KeyBindContext = createContext({
-  shortcuts: [] as ShortcutType[],
-  registerShortcut: (shortcut: ShortcutType) => {
-    console.log('Not implemented', { shortcut });
-  },
-} as KeyBindContextState);
+export const KeyBindContext = createContext({} as KeyBindContextState);
 
 const KeyBindProvider: FC<KeyBindProviderPropsI> = ({
   children,
@@ -38,12 +33,20 @@ const KeyBindProvider: FC<KeyBindProviderPropsI> = ({
     [storeShortcuts]
   );
 
+  const getKeysByPlatform = useCallback(
+    (command: ShortcutType) => {
+      return findFirstPlatformMatch(command.keys);
+    },
+    [storeShortcuts]
+  );
+
   useShortcuts(storeShortcuts);
 
   const commandsContext = useMemo<KeyBindContextState>(
     () => ({
       shortcuts: storeShortcuts,
       registerShortcut,
+      getKeysByPlatform,
     }),
     [storeShortcuts]
   );

@@ -1,5 +1,7 @@
-import { ShortcutType } from '../types';
+import { ShortcutType, KeysType, FindFirstPlatformMatchType } from '../types';
 import PlatformDetector from './platform';
+import { PlatformType } from '../types/platform.type';
+
 export * from './platform';
 
 export const hasItems = (items: any[]) => items.length > 0;
@@ -18,14 +20,39 @@ export const arraysAreEqual = (a: any[], b: any[]) => {
   return true;
 };
 
+export const findFirstPlatformMatch = (
+  keys: KeysType
+): FindFirstPlatformMatchType | null => {
+  const match =
+    Object.entries(keys as Record<any, any>).filter(([, value]) =>
+      hasItems(value)
+    )[0] ?? [];
+
+  return hasItems(match)
+    ? {
+        platform: match[0] as PlatformType,
+        keys: match[1] as string[],
+      }
+    : null;
+};
+
 export const getShortcutKeys = (shortcut: ShortcutType) => {
   const platform = new PlatformDetector().currentPlatform();
 
-  const keys = shortcut.keys[platform];
+  const keys: string[] | undefined = shortcut.keys[platform];
 
   if (!keys) {
-    console.warn(`No keys found for platform ${platform} in ${shortcut.label}`);
-    return Object.values(shortcut.keys)[0] ?? [];
+    const defaultPlatform = findFirstPlatformMatch(shortcut.keys);
+
+    console.warn(
+      `No keys found for platform "${platform}" in "${shortcut.label}" ${
+        defaultPlatform
+          ? `using keys for platform "${defaultPlatform.platform}"`
+          : ''
+      }`
+    );
+
+    return defaultPlatform ? defaultPlatform.keys : [];
   }
 
   return keys;
@@ -37,7 +64,8 @@ export const findShortcut = (shortcuts: ShortcutType[], keys: string[]) => {
   }
 
   for (const shortcut of shortcuts) {
-    if (arraysAreEqual(getShortcutKeys(shortcut), keys)) {
+    const shortcutKeys = getShortcutKeys(shortcut);
+    if (arraysAreEqual(shortcutKeys, keys)) {
       return shortcut;
     }
   }
