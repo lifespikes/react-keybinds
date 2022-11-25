@@ -118,6 +118,52 @@ const App = () => {
 };
 ```
 
+You can also register a shortcut when a component is mounted. Like this:
+
+```tsx
+import * as React from 'react';
+import {useMemo, useState} from 'react';
+import {ShortcutType, useKeyBind, useRegisterShortcut} from 'react-keybinds';
+import inspire from '../data/inspire';
+
+const RegisterOnMount = () => {
+    const [text, setText] = useState(inspire[0]);
+
+    const {getKeysByPlatform} = useKeyBind();
+
+    const shortcut: ShortcutType = useMemo(
+        () => ({
+            keys: {
+                Windows: ['Control', 'Enter'],
+            },
+            label: 'Inspired command',
+            callback: () => {
+                const randomIndex = Math.floor(Math.random() * inspire.length);
+                setText(inspire[randomIndex]);
+            },
+        }),
+        []
+    );
+
+    useRegisterShortcut(shortcut); // register on mount
+
+    const keysForInspire = getKeysByPlatform(shortcut);
+
+    return (
+        <div>
+            <h1>Inspire command</h1>
+            <p>
+                Press: <strong>{keysForInspire?.keys?.join(' + ')}</strong>{' '}
+            </p>
+            <blockquote>{`"${text}"`}</blockquote>
+        </div>
+    );
+};
+
+export default RegisterOnMount;
+
+```
+
 ### 4. List registered shortcuts
 
 You can list the registered shortcuts using the useKeyBind hook
@@ -153,6 +199,43 @@ const App = () => {
         <KeyBindProvider>
             <ShowShortcuts/>
         </KeyBindProvider>
+    );
+};
+```
+
+## Notes
+
+- If a user is using a platform for which you did not specify the keys, it will default to the keys of a platform that
+  you have configured.
+  If you want to see which platform the keys will be taken from, you can use the `getKeysByPlatform` method.
+
+```tsx
+const shortcut: ShortcutType = useMemo(
+    () => ({
+        keys: {
+            Windows: ['Control', 'Enter'],
+        },
+        label: 'Inspired command',
+        callback: () => {
+        },
+    }),
+    []
+);
+
+const informationForInspire = getKeysByPlatform(shortcut); // {platform: 'Windows', keys: ['Control', 'Enter']}
+```
+
+- If you want to have more information about the current platform, you can use the usePlatform hook
+```tsx
+import { usePlatform } from 'react-keybinds';
+
+const App = () => {
+    const platform = usePlatform();
+    return (
+        <div>
+            <h1>Current platform: {platform.currentPlatform()}</h1>
+            <h1>Is Windows: {platform.isWindows()}</h1>
+        </div>
     );
 };
 ```
