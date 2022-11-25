@@ -7,5 +7,5 @@ export const useRegisterShortcut = (shortcut: ShortcutType) => {
 
   useEffect(() => {
     registerShortcut(shortcut);
-  }, []);
+  }, [shortcut]);
 };

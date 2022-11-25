@@ -79,3 +79,10 @@ export const isDuplicate = (
 ) => {
   return !!findShortcut(shortcuts, getShortcutKeys(shortcut));
 };
+
+export const logMsg = (short: ShortcutType, short2: ShortcutType) =>
+  `Shortcut is duplicated: label: "${short.label}", keys: "${JSON.stringify(
+    short.keys
+  )}" ,replacing for: label: "${short2.label}", keys: "${JSON.stringify(
+    short2.keys
+  )}"...`;

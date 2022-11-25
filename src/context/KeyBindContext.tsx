@@ -11,7 +11,7 @@ import {
   KeyBindProviderPropsI,
   ShortcutType,
 } from '../types';
-import { findFirstPlatformMatch, isDuplicate } from '../utils';
+import { findFirstPlatformMatch, isDuplicate, logMsg } from '../utils';
 import { useShortcuts } from '../hooks';
 
 export const KeyBindContext = createContext({} as KeyBindContextState);
@@ -23,12 +23,19 @@ const KeyBindProvider: FC<KeyBindProviderPropsI> = ({
   const [storeShortcuts, setStoreCommands] = useState(shortcuts);
 
   const registerShortcut = useCallback(
-    (command: ShortcutType) => {
-      if (isDuplicate(storeShortcuts, command)) {
-        console.warn('Command already registered', { storeShortcuts, command });
-        return;
-      }
-      setStoreCommands(prev => [...prev, command]);
+    (shortcut: ShortcutType) => {
+      setStoreCommands(prev => {
+        return [
+          ...(prev?.filter(s => {
+            const isDuplicated = isDuplicate(prev, s);
+            if (isDuplicated) {
+              console.warn(logMsg(s, shortcut));
+            }
+            return !isDuplicated;
+          }) ?? []),
+          shortcut,
+        ];
+      });
     },
     [storeShortcuts]
   );
