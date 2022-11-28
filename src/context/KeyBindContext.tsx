@@ -19,6 +19,7 @@ export const KeyBindContext = createContext({} as KeyBindContextState);
 const KeyBindProvider: FC<KeyBindProviderPropsI> = ({
   children,
   shortcuts = [],
+  debug = false,
 }) => {
   const [storeShortcuts, setStoreCommands] = useState(shortcuts);
 
@@ -28,7 +29,7 @@ const KeyBindProvider: FC<KeyBindProviderPropsI> = ({
         return [
           ...(prev?.filter(s => {
             const isDuplicated = isDuplicate(prev, s);
-            if (isDuplicated) {
+            if (isDuplicated && debug) {
               console.warn(logMsg(s, shortcut));
             }
             return !isDuplicated;

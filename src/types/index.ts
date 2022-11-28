@@ -4,6 +4,7 @@ import { PlatformType } from './platform.type';
 export interface KeyBindProviderPropsI {
   children?: React.ReactNode;
   shortcuts?: ShortcutType[];
+  debug?: boolean;
 }
 
 export type KeysType = {
