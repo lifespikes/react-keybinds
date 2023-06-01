@@ -19,6 +19,7 @@ export const KeyBindContext = createContext({} as KeyBindContextState);
 const KeyBindProvider: FC<KeyBindProviderPropsI> = ({
   children,
   shortcuts = [],
+  debounce,
   debug = false,
 }) => {
   const [storeShortcuts, setStoreCommands] = useState(shortcuts);
@@ -48,7 +49,7 @@ const KeyBindProvider: FC<KeyBindProviderPropsI> = ({
     [storeShortcuts]
   );
 
-  useShortcuts(storeShortcuts);
+  useShortcuts(storeShortcuts, debounce);
 
   const commandsContext = useMemo<KeyBindContextState>(
     () => ({

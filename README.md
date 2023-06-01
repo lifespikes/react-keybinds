@@ -50,6 +50,18 @@ const App = () => {
 <sub>It is recommended that you place the provider at the beginning of the component tree.
 </sub>
 
+<sub>By default, the provider will have a debounce on key presses events of 1000ms, you can change this value by passing the `debounce` prop to the provider</sub>
+
+```tsx
+const App = () => {
+  return (
+          <KeyBindProvider debounce={500}>
+            hello world
+          </KeyBindProvider>
+  );
+}
+```
+
 ### 2. Global shortcuts
 
 You can register commands globally

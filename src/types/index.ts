@@ -5,6 +5,7 @@ export interface KeyBindProviderPropsI {
   children?: React.ReactNode;
   shortcuts?: ShortcutType[];
   debug?: boolean;
+  debounce?: number;
 }
 
 export type KeysType = {
