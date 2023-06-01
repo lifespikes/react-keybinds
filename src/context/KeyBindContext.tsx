@@ -12,7 +12,7 @@ import {
   ShortcutType,
 } from '../types';
 import { findFirstPlatformMatch, isDuplicate, logMsg } from '../utils';
-import { useShortcuts } from '../hooks';
+import { useShortcuts } from '../hooks/useShortcuts';
 
 export const KeyBindContext = createContext({} as KeyBindContextState);
 
