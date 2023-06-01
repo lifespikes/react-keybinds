@@ -240,3 +240,5 @@ const App = () => {
     );
 };
 ```
+
+- If you want to take a look at a list of all the keys for different platforms, you can use the following [link](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values)
