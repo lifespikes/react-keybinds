@@ -58,26 +58,57 @@ export const getShortcutKeys = (shortcut: ShortcutType) => {
   return keys;
 };
 
-export const findShortcut = (shortcuts: ShortcutType[], keys: string[]) => {
+export const findShortcutIndex = (
+  shortcuts: ShortcutType[],
+  keys: string[]
+) => {
   if (!hasItems(keys)) {
-    return null;
+    return -1;
   }
 
+  let index = 0;
   for (const shortcut of shortcuts) {
     const shortcutKeys = getShortcutKeys(shortcut);
     if (arraysAreEqual(shortcutKeys, keys)) {
-      return shortcut;
+      return index;
     }
+    index++;
   }
 
-  return null;
+  return -1;
 };
 
-export const isDuplicate = (
-  shortcuts: ShortcutType[],
-  shortcut: ShortcutType
-) => {
-  return !!findShortcut(shortcuts, getShortcutKeys(shortcut));
+export const findShortcut = (shortcuts: ShortcutType[], keys: string[]) => {
+  const shortcutIndex = findShortcutIndex(shortcuts, keys);
+  return shortcutIndex > -1 ? shortcuts[shortcutIndex] : null;
+};
+
+export const getShortcutWithDefaultValues = (
+  shortcut: ShortcutType,
+  platform: PlatformType = 'Mac'
+): ShortcutType => {
+  const platforms: PlatformType[] = [
+    'iOS',
+    'Mac',
+    'Android',
+    'Windows',
+    'Linux',
+  ];
+
+  const defaultKeys =
+    Object.values(shortcut.keys)[0] ?? shortcut.keys[platform];
+
+  const keys = platforms.reduce((acc, curr) => {
+    return {
+      ...acc,
+      [curr]: shortcut.keys[curr] ?? defaultKeys,
+    };
+  }, {});
+  return {
+    ...shortcut,
+    keys,
+    _defaultKeys: shortcut.keys,
+  };
 };
 
 export const logMsg = (short: ShortcutType, short2: ShortcutType) =>

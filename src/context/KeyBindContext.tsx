@@ -11,7 +11,12 @@ import {
   KeyBindProviderPropsI,
   ShortcutType,
 } from '../types';
-import { findFirstPlatformMatch, isDuplicate, logMsg } from '../utils';
+import {
+  findFirstPlatformMatch,
+  findShortcutIndex,
+  getShortcutKeys,
+  getShortcutWithDefaultValues,
+} from '../utils';
 import { useShortcuts } from '../hooks/useShortcuts';
 
 export const KeyBindContext = createContext({} as KeyBindContextState);
@@ -20,23 +25,24 @@ const KeyBindProvider: FC<KeyBindProviderPropsI> = ({
   children,
   shortcuts = [],
   debounce,
-  debug = false,
+  // debug = false,
 }) => {
-  const [storeShortcuts, setStoreCommands] = useState(shortcuts);
-
+  const [storeShortcuts, setStoreCommands] = useState(
+    shortcuts.map(shr => getShortcutWithDefaultValues(shr))
+  );
   const registerShortcut = useCallback(
     (shortcut: ShortcutType) => {
-      setStoreCommands(prev => {
-        return [
-          ...(prev?.filter(s => {
-            const isDuplicated = isDuplicate(prev, s);
-            if (isDuplicated && debug) {
-              console.warn(logMsg(s, shortcut));
-            }
-            return !isDuplicated;
-          }) ?? []),
-          shortcut,
-        ];
+      setStoreCommands(prevShortcuts => {
+        const idx = findShortcutIndex(shortcuts, getShortcutKeys(shortcut));
+
+        const newShortcuts = [...prevShortcuts];
+
+        if (idx > -1) {
+          newShortcuts[idx] = getShortcutWithDefaultValues(shortcut);
+          return prevShortcuts;
+        }
+
+        return [...prevShortcuts, getShortcutWithDefaultValues(shortcut)];
       });
     },
     [storeShortcuts]
@@ -57,7 +63,7 @@ const KeyBindProvider: FC<KeyBindProviderPropsI> = ({
       registerShortcut,
       getKeysByPlatform,
     }),
-    [storeShortcuts]
+    [storeShortcuts, registerShortcut, getKeysByPlatform]
   );
   return (
     <KeyBindContext.Provider value={commandsContext}>

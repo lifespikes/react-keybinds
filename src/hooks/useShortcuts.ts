@@ -1,7 +1,7 @@
-import {useEffect, useState} from 'react';
-import {useDebouncedCallback} from 'use-debounce';
-import {findShortcut, hasItems} from '../utils';
-import { ShortcutType} from '../types';
+import { useEffect, useState } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
+import { findShortcut, hasItems } from '../utils';
+import { ShortcutType } from '../types';
 
 export const useShortcuts = (shortcuts: ShortcutType[], debounce?: number) => {
   const [keys, setKeys] = useState<string[]>([]);
@@ -10,9 +10,12 @@ export const useShortcuts = (shortcuts: ShortcutType[], debounce?: number) => {
     setKeys([]);
   }, debounce ?? 1000);
 
+  console.log(keys);
+
   useEffect(() => {
     if (hasItems(keys) && hasItems(shortcuts)) {
       const shortcut = findShortcut(shortcuts, keys);
+      console.log('shoortcut', shortcut);
       if (shortcut && shortcut.callback) {
         shortcut.callback();
         setKeys([]);

@@ -14,6 +14,7 @@ export type KeysType = {
 
 export type ShortcutType = {
   keys: KeysType;
+  _defaultKeys?: KeysType;
   label: string;
   callback?: () => void;
 };
