@@ -10,12 +10,9 @@ export const useShortcuts = (shortcuts: ShortcutType[], debounce?: number) => {
     setKeys([]);
   }, debounce ?? 1000);
 
-  console.log(keys);
-
   useEffect(() => {
     if (hasItems(keys) && hasItems(shortcuts)) {
       const shortcut = findShortcut(shortcuts, keys);
-      console.log('shoortcut', shortcut);
       if (shortcut && shortcut.callback) {
         shortcut.callback();
         setKeys([]);
